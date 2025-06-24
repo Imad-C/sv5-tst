@@ -1,13 +1,11 @@
 <script lang="ts">
-	import { todos } from './todo.svelte';
+	import { getTodosState } from './todo.svelte';
+	import Todo from '../../components/Todo.svelte';
+	const todos = getTodosState();
 
 	let todoText = '';
 	function handleAddTodo() {
 		todos.addTodo(todoText);
-	}
-
-	function updateCompleted(id: string, value: boolean) {
-		todos.updateTodo(id, { completed: value });
 	}
 </script>
 
@@ -22,12 +20,7 @@
 
 	<div>
 		{#each todos.todos as todo}
-			<p>ID: {todo.id} | Text: {todo.text} | Completed: {todo.completed}</p>
-			<button
-				on:click={() => {
-					updateCompleted(todo.id, !todo.completed);
-				}}>Update Completed</button
-			>
+			<Todo {todo} />
 		{/each}
 	</div>
 </div>
