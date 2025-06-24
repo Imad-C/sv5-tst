@@ -14,7 +14,7 @@ class Todos {
 	get completed() {
 		return this.todos.filter((todo) => {
 			return todo.completed === true;
-		});
+		}).length;
 	}
 
 	addTodo(text: string) {
