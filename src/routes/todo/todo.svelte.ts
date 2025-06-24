@@ -1,4 +1,4 @@
-import { getContext, setContext } from 'svelte';
+// import { getContext, setContext } from 'svelte';
 
 class Todo {
 	id: string = crypto.randomUUID();
@@ -12,6 +12,18 @@ class Todo {
 
 class Todos {
 	todos = $state<Todo[]>([]);
+	length = $derived(this.todos.length);
+	// length = (function () {
+	// 	return this.todos.length;
+	// })();
+
+	// get length() {
+	// 	return this._length;
+	// }
+
+	qtyOfCompleted = $derived(this.todos.filter((todo) => todo.completed).length);
+
+	theCompletedItems = $derived(this.todos.filter((todo) => todo.completed));
 
 	addTodo(text: string) {
 		const todo = new Todo(text);
@@ -24,12 +36,18 @@ class Todos {
 			Object.assign(todo, updates);
 		}
 	}
+
+	completeAll() {
+		this.todos.forEach((todo) => {
+			todo.completed = true;
+		});
+	}
 }
 
-export const todos = new Todos();
+export const todosState = new Todos();
 
 export function getTodos() {
-	return todos;
+	return todosState;
 }
 
 // type Todo = {
@@ -55,11 +73,11 @@ export function getTodos() {
 
 // export const todos = new Todos();
 
-const TODOS_KEY = Symbol('TODOS');
-export function setTodosState() {
-	return setContext(TODOS_KEY, new Todos());
-}
+// const TODOS_KEY = Symbol('TODOS');
+// export function setTodosState() {
+// 	return setContext(TODOS_KEY, new Todos());
+// }
 
-export function getTodosState() {
-	return getContext<ReturnType<typeof setTodosState>>(TODOS_KEY);
-}
+// export function getTodosState() {
+// 	return getContext<ReturnType<typeof setTodosState>>(TODOS_KEY);
+// }

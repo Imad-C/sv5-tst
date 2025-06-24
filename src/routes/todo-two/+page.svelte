@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { getTodosState } from '../todo/todo.svelte';
-	import Todo from '../../components/Todo.svelte';
-	const todos = getTodosState();
+	import { todosState } from '../todo/todo.svelte';
+	// import Todo from '../../components/Todo.svelte';
+	// // const todos = getTodosState();
 
-	let todoText = '';
-	function handleAddTodo() {
-		todos.addTodo(todoText);
-	}
+	// let todoText = '';
+	// function handleAddTodo() {
+	// 	todosState.addTodo(todoText);
+	// }
 </script>
 
-<div class="layout">
+<!-- <div class="layout">
 	<a href="/todo">Todo One</a>
 
 	<div>
@@ -19,11 +19,16 @@
 	</div>
 
 	<div>
-		{#each todos.todos as todo}
+		{#each todosState.todos as todo}
 			<Todo {todo} />
 		{/each}
 	</div>
-</div>
+
+	<p>{todosState.todos.length}</p>
+	<p>{todosState.length}</p>
+</div> -->
+
+<p>{todosState.length}</p>
 
 <style>
 	.layout {

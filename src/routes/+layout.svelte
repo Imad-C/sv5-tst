@@ -1,9 +1,9 @@
 <script>
-	import { setTodosState } from './todo/todo.svelte';
+	// import { setTodosState } from './todo/todo.svelte';
 
 	let { children } = $props();
 
-	setTodosState();
+	// setTodosState();
 </script>
 
 <main>

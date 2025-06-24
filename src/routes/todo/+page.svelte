@@ -1,12 +1,25 @@
 <script lang="ts">
-	import { getTodosState } from './todo.svelte';
+	import { todosState } from './todo.svelte';
 	import Todo from '../../components/Todo.svelte';
-	const todos = getTodosState();
+	// const todos = getTodosState();
 
 	let todoText = '';
 	function handleAddTodo() {
-		todos.addTodo(todoText);
+		todosState.addTodo(todoText);
 	}
+
+	function handleCompleteAllTodos() {
+		todosState.completeAll();
+	}
+
+	let todosLength = $derived(todosState.todos.length);
+
+	// $effect(() => {
+	// 	const equal = todosState.todos.length === todosState.todos.length;
+	// 	console.log('this has updated cos something in here is reactive');
+	// });
+
+	let length = $state(todosState.todos.length);
 </script>
 
 <div class="layout">
@@ -15,14 +28,24 @@
 	<div>
 		<label for="todo-text">Todo Text</label>
 		<input id="todo-text" type="text" bind:value={todoText} />
-		<button on:click={handleAddTodo}>Add</button>
+		<button onclick={handleAddTodo}>Add</button>
 	</div>
 
 	<div>
-		{#each todos.todos as todo}
+		{#each todosState.todos as todo (todo.id)}
 			<Todo {todo} />
 		{/each}
 	</div>
+
+	<p>
+		<button onclick={handleCompleteAllTodos}>Mark all todos as completed</button>
+	</p>
+
+	<!-- <p>{todosLength}</p> -->
+	<p>{todosState.length}</p>
+	<!-- <p>Completed: {todosState.qtyOfCompleted}</p>
+	<pre>{JSON.stringify(todosState.theCompletedItems, null, 2)}</pre> -->
+	<!-- <p>{length}</p> -->
 </div>
 
 <style>
