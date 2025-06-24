@@ -10,7 +10,12 @@ class Todo {
 
 class Todos {
 	todos = $state<Todo[]>([]);
-	length = $derived(this.todos.length);
+
+	get completed() {
+		return this.todos.filter((todo) => {
+			return todo.completed === true;
+		});
+	}
 
 	addTodo(text: string) {
 		const todo = new Todo(text);

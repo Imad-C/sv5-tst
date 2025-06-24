@@ -24,7 +24,9 @@
 		{/each}
 	</div>
 
-	<p>Length: {todos.length}</p>
+	<p>Length: {todos.todos.length}</p>
+
+	<pre>{JSON.stringify(todos.completed, null, 2)}</pre>
 </div>
 
 <style>
