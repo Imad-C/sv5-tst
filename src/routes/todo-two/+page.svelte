@@ -3,11 +3,6 @@
 	import Todo from '../../components/Todo.svelte';
 
 	let todoText = $state('');
-	let length = $state(0);
-
-	$effect(() => {
-		length = todos.todos.length;
-	});
 </script>
 
 <div class="layout">
@@ -29,7 +24,7 @@
 		{/each}
 	</div>
 
-	<p>Length: {length}</p>
+	<p>Length: {todos.length}</p>
 </div>
 
 <style>

@@ -26,4 +26,3 @@ class Todos {
 }
 
 export const todos = new Todos();
-// export let length = $derived(todos.todos.length);
