@@ -1,12 +1,8 @@
 <script lang="ts">
-	import { getTodosState } from './todo.svelte';
+	import { todos } from './todo.svelte';
 	import Todo from '../../components/Todo.svelte';
-	const todos = getTodosState();
 
-	let todoText = '';
-	function handleAddTodo() {
-		todos.addTodo(todoText);
-	}
+	let todoText = $state('');
 </script>
 
 <div class="layout">
@@ -15,7 +11,11 @@
 	<div>
 		<label for="todo-text">Todo Text</label>
 		<input id="todo-text" type="text" bind:value={todoText} />
-		<button on:click={handleAddTodo}>Add</button>
+		<button
+			onclick={() => {
+				todos.addTodo(todoText);
+			}}>Add</button
+		>
 	</div>
 
 	<div>
@@ -23,6 +23,8 @@
 			<Todo {todo} />
 		{/each}
 	</div>
+
+	<p>Length: {todos.length}</p>
 </div>
 
 <style>
