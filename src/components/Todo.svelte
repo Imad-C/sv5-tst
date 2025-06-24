@@ -2,5 +2,18 @@
 	let { todo } = $props();
 </script>
 
-<p>ID: {todo.id} | Text: {todo.text} | Completed: {todo.completed}</p>
-<input type="checkbox" bind:checked={todo.completed} />
+<div class="layout">
+	<p>ID: {todo.id}</p>
+	<p>|</p>
+	<p>Text: {todo.text}</p>
+	<p>|</p>
+	<p>Completed: {todo.completed}</p>
+	<input type="checkbox" bind:checked={todo.completed} />
+</div>
+
+<style>
+	.layout {
+		display: flex;
+		gap: 1rem;
+	}
+</style>
